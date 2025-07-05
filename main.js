@@ -42,6 +42,10 @@ function showSpotifySetup() {
         <i class="fab fa-spotify mr-2"></i>
         Connect Spotify
       </button>
+      <div class="mt-4 text-xs text-yellow-300">
+        <p>Current URL: ${window.location.href}</p>
+        <p>If you get an error, make sure this URL is added to your Spotify app's redirect URIs.</p>
+      </div>
     </div>
   `;
 }
@@ -118,7 +122,7 @@ function authenticateSpotify() {
   console.log('Authenticating Spotify with Client ID:', SPOTIFY_CLIENT_ID);
   console.log('Current redirect URI:', SPOTIFY_REDIRECT_URI);
   
-  if (!SPOTIFY_CLIENT_ID || SPOTIFY_CLIENT_ID === 'YOUR_SPOTIFY_CLIENT_ID_HERE') {
+  if (!SPOTIFY_CLIENT_ID) {
     console.log('Client ID not set up yet');
     showSpotifySetupError();
     return;
@@ -154,6 +158,14 @@ function showSpotifyError(message) {
       <i class="fas fa-exclamation-triangle text-2xl mb-2 text-red-400"></i>
       <h3 class="text-lg font-semibold mb-2">Spotify Error</h3>
       <p class="mb-4">${message}</p>
+      <div class="bg-white bg-opacity-10 rounded-lg p-4 mb-4 text-left text-sm">
+        <p class="mb-2"><strong>Common fixes:</strong></p>
+        <ul class="list-disc list-inside space-y-1">
+          <li>Make sure you're running on a local server (not just opening the HTML file)</li>
+          <li>Add this URL to your Spotify app's redirect URIs: <code class="bg-black bg-opacity-30 px-1 rounded">${window.location.origin}${window.location.pathname}</code></li>
+          <li>Try clearing your browser cache</li>
+        </ul>
+      </div>
       <button onclick="authenticateSpotify()" 
               class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
         <i class="fab fa-spotify mr-2"></i>
@@ -176,7 +188,15 @@ function showRedirectUriError() {
         <ol class="list-decimal list-inside space-y-1 mt-3">
           <li>Go to <a href="https://developer.spotify.com/dashboard" target="_blank" class="text-green-400 underline">Spotify Developer Dashboard</a></li>
           <li>Find your app and click "Edit Settings"</li>
-          <li>Add this Redirect URI: <code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code></li>
+          <li>Add these Redirect URIs:</li>
+          <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">${window.location.origin}</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:3000</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:3000</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:5500</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:5500</code></li>
+          </ul>
           <li>Click "Save"</li>
           <li>Refresh this page and try again</li>
         </ol>
@@ -208,6 +228,8 @@ function showSpotifySetupError() {
             <li><code class="bg-black bg-opacity-30 px-1 rounded">${window.location.origin}</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:3000</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:3000</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:5500</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:5500</code></li>
           </ul>
           <li>Click "Save"</li>
         </ol>
