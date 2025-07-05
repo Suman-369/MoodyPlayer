@@ -2,7 +2,7 @@
 
 // API Configuration
 // Spotify API Configuration
-const SPOTIFY_CLIENT_ID = 'f02c2740d6214d13b3cd28791ba5e0a5';
+const SPOTIFY_CLIENT_ID = "59042f8f2d674ba7a0ef45e6e5bb3c4f";
 const SPOTIFY_REDIRECT_URI = window.location.origin + window.location.pathname;
 const SPOTIFY_SCOPES = 'user-read-private user-read-email';
 
@@ -43,8 +43,9 @@ function showSpotifySetup() {
         Connect Spotify
       </button>
       <div class="mt-4 text-xs text-yellow-300">
-        <p>Current URL: ${window.location.href}</p>
-        <p>If you get an error, make sure this URL is added to your Spotify app's redirect URIs.</p>
+        <p><strong>Current URL:</strong> ${window.location.href}</p>
+        <p><strong>Add this URL to your Spotify app's redirect URIs:</strong></p>
+        <code class="bg-black bg-opacity-30 px-2 py-1 rounded text-xs">${window.location.origin}${window.location.pathname}</code>
       </div>
     </div>
   `;
@@ -190,7 +191,7 @@ function showRedirectUriError() {
           <li>Find your app and click "Edit Settings"</li>
           <li>Add these Redirect URIs:</li>
           <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
-            <li><code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code> <strong>(Required for GitHub Pages)</strong></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">${window.location.origin}</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:3000</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:3000</code></li>
@@ -200,6 +201,7 @@ function showRedirectUriError() {
           <li>Click "Save"</li>
           <li>Refresh this page and try again</li>
         </ol>
+        <p class="mt-2 text-xs text-yellow-300"><strong>Note:</strong> Since you're using GitHub Pages, make sure to add the GitHub Pages URL first!</p>
       </div>
       <button onclick="window.open('https://developer.spotify.com/dashboard', '_blank')" 
               class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
@@ -224,7 +226,7 @@ function showSpotifySetupError() {
           <li>Copy your Client ID and replace it in main.js</li>
           <li>Add these Redirect URIs in your app settings:</li>
           <ul class="list-disc list-inside ml-4 mt-1 space-y-1">
-            <li><code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code></li>
+            <li><code class="bg-black bg-opacity-30 px-1 rounded">${currentRedirectUri}</code> <strong>(Required for GitHub Pages)</strong></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">${window.location.origin}</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://localhost:3000</code></li>
             <li><code class="bg-black bg-opacity-30 px-1 rounded">http://127.0.0.1:3000</code></li>
@@ -234,6 +236,7 @@ function showSpotifySetupError() {
           <li>Click "Save"</li>
         </ol>
         <p class="mt-2 text-xs text-yellow-300">Current URL: <code class="bg-black bg-opacity-30 px-1 rounded">${window.location.href}</code></p>
+        <p class="mt-1 text-xs text-yellow-300"><strong>Note:</strong> Since you're using GitHub Pages, make sure to add the GitHub Pages URL first!</p>
       </div>
       <button onclick="window.open('https://developer.spotify.com/dashboard', '_blank')" 
               class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
