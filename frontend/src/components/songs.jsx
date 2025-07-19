@@ -1,15 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import "./moodsongs.css"
 
-const MoodSongs = () => {
+const MoodSongs = ({Songs}) => {
+const [isPlaying , setIsPlaying] = useState(null)
+const audioRefs = useRef([])
 
-    const [Songs,setSongs] = useState([
-        {
-            title:"test-title",
-            artist:"test-artist",
-            url :"test_url"
+const handlePlay = (index) => {
+    if(isPlaying === index){
+        audioRefs.current[index].pause();
+        setIsPlaying(null)
+    }
+    else{
+        if (isPlaying !== null && audioRefs.current[isPlaying]) {
+            audioRefs.current[isPlaying].pause();
+            audioRefs.current[isPlaying].currentTime = 0;
         }
-    ])
+        audioRefs.current[index].play();
+        setIsPlaying(index)
+    }
+}
+   
   return (
     <div className='mood-Songs'>
         <h2>Recommended Songs</h2>
@@ -21,8 +31,17 @@ const MoodSongs = () => {
                         <p>{song.artist}</p>
                     </div>
                     <div className="play-pause-button">
-                        <i className="ri-pause-mini-line"></i>
-                        <i className="ri-play-circle-fill"></i>
+                        <audio
+                            ref={el => audioRefs.current[index] = el}
+                            src={song.audio}
+                            onEnded={() => setIsPlaying(null)}
+                            style={{ display: 'none' }}
+                        />
+                       <button onClick={()=>handlePlay(index)}>
+                        {isPlaying === index ? <i className="ri-pause-mini-line"></i> :
+                         <i className="ri-play-circle-fill"></i>}
+                       </button>
+                    
                     </div>
                 </div>
             ))}

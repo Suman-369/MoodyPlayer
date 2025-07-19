@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import * as faceapi from 'face-api.js';
 import "./facial.css"
+import axios from 'axios';
 
-const FaceExpressionDetector = () => {
+const FaceExpressionDetector = ({setSongs}) => {
   const videoRef = useRef();
 
   // Load models
@@ -48,8 +49,13 @@ const FaceExpressionDetector = () => {
         }
        }
        console.log(_expressions);
+
+       axios.get(`http://localhost:3000/songs?mood=${_expressions}`)
+        .then(response=>{
+          console.log(response.data)
+          setSongs(response.data.songs)
+        })
       }
-      
   }
 
   return (

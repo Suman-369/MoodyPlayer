@@ -4,12 +4,14 @@ import FaceExpressionDetector from './components/facialexpresions'
 import MoodSongs from './components/songs'
 
 function App() {
+  const [Songs,setSongs] = useState([
   
+])
 
   return (
     <>
-        <FaceExpressionDetector/>
-        <MoodSongs/>
+        <FaceExpressionDetector setSongs={setSongs}/>
+        <MoodSongs Songs={Songs} />
     </>
   )
 }

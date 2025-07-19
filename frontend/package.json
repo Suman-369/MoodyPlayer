@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.10.0",
     "face-api.js": "^0.22.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
